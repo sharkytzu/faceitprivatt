@@ -1,0 +1,72 @@
+function openConnectPopup() {
+    const popup = document.querySelector('.modal-connect')
+    const openBtn = document.querySelector('.intro__steam')
+ 
+    const closeBtns = document.querySelectorAll('.modal-connect__body-header-button')
+ 
+    openBtn.addEventListener('click', e => {
+       popup.classList.add('open')
+       document.body.style.overflowY = 'hidden'
+    })
+ 
+    closeBtns.forEach(btn => {
+       btn.addEventListener('click', e => {
+          popup.classList.remove('open')
+          document.body.style.overflowY = 'auto'
+       })
+    })
+ 
+ }
+ 
+ function openTermsPopup() {
+    const popup = document.querySelector('.modal-terms')
+    const openBtn = document.querySelector('.try__title')
+ 
+    const wrapper = document.querySelector('.modal-terms')
+    const propagination = document.querySelector('.modal-terms__body')
+ 
+    openBtn.addEventListener('click', e => {
+       popup.classList.add('open')
+       document.body.style.overflowY = 'hidden'
+    })
+ 
+    wrapper.addEventListener('click', e => {
+       popup.classList.remove('open')
+       document.body.style.overflowY = 'auto'
+    })
+ 
+    propagination.addEventListener('click', e => e.stopPropagation())
+ }
+ 
+ function disableBtn() {
+    const btn = document.querySelector('.modal-connect__body-content-confirm')
+ 
+    btn.addEventListener('click', e => {
+       if (btn.getAttribute('disabled')) {
+          e.preventDefault()
+       }
+ 
+       btn.setAttribute('disabled', 'disabled')
+       setTimeout(() => btn.removeAttribute('disabled'), 5000)
+    })
+ }
+ 
+const checkbox = document.querySelector('.rules-checkbox')
+if (typeof(checkbox) != 'undefined' && checkbox != null)
+{
+  // Exists.
+  checkbox.addEventListener('change', (event) => {
+  if (event.currentTarget.checked) {
+    document.querySelector('.main-btn').disabled = false;
+  } else {
+     document.querySelector('.main-btn').disabled = true;
+  }
+})
+} else {
+    document.querySelector('.modal-connect').classList.add('open');
+}
+
+ 
+ openConnectPopup()
+ openTermsPopup()
+ disableBtn()
